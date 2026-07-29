@@ -53,7 +53,7 @@
   .trailer .intro { margin-left: auto; margin-right: auto; }
   .player-wrap { width: min(1480px, calc(100vw - 28px)); margin: 0 auto; }
   .player { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.55); border: 1px solid rgba(240,167,66,0.18); }
-  .player video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .player iframe { width: 100%; aspect-ratio: 16 / 9; display: block; }
 
   .scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
   .scene { border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 10px 34px rgba(0,0,0,0.45); }
@@ -100,9 +100,7 @@
   </div>
   <div class="player-wrap reveal">
     <div class="player">
-      <video id="trailer-video" controls playsinline preload="metadata" poster="assets/trailer-poster.jpg">
-        <source src="assets/trailer-web.mp4" type="video/mp4">
-      </video>
+      <iframe id="trailer-video" src="https://www.youtube-nocookie.com/embed/hnd2yBGhKuA" title="Poopitypoo trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -127,8 +125,8 @@
   <div class="container reveal">
     <p class="kicker">Coming Soon</p>
     <h2>New episodes are coming</h2>
-    <p>The journey begins soon on YouTube.</p>
-    <button class="btn" data-play-trailer>&#9654;&nbsp; Watch the Trailer</button>
+    <p>The journey begins on YouTube. Be there from the start.</p>
+    <a class="btn" href="https://www.youtube.com/@poopitypoo" target="_blank" rel="noopener">&#9654;&nbsp; Subscribe on YouTube</a>
   </div>
 </section>
 
@@ -137,13 +135,18 @@
 </footer>
 
 <script>
-  // "Watch the Trailer" centers the video on screen and starts it playing.
+  // "Watch the Trailer" centers the YouTube player and starts it playing
+  // (src swap with autoplay counts as a real YouTube view).
   const video = document.getElementById("trailer-video");
+  let started = false;
   document.querySelectorAll("[data-play-trailer]").forEach(el => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
       video.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => { video.play().catch(() => {}); }, 650);
+      if (!started) {
+        started = true;
+        setTimeout(() => { video.src = "https://www.youtube-nocookie.com/embed/hnd2yBGhKuA?autoplay=1"; }, 650);
+      }
     });
   });
 
