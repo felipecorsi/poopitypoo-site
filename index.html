@@ -33,7 +33,7 @@
   nav a:hover { color: var(--glow); }
 
   .hero { position: relative; min-height: 92vh; display: flex; align-items: flex-end; overflow: hidden; }
-  .hero .bg { position: absolute; inset: 0; background: url("assets/hero-king.jpg") center 22%/cover no-repeat; }
+  .hero .bg { position: absolute; inset: 0; background: url("assets/hero-market.jpg") center 30%/cover no-repeat; }
   .hero .veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,18,12,0.55) 0%, rgba(26,18,12,0.15) 40%, rgba(26,18,12,0.96) 92%); }
   .hero-inner { position: relative; padding: 0 0 64px; max-width: 640px; }
   .hero h1 { font-size: clamp(44px, 8vw, 84px); line-height: 1.02; color: var(--cream); text-shadow: 0 4px 30px rgba(0,0,0,0.55); }
@@ -52,7 +52,11 @@
   .intro { color: var(--muted); max-width: 560px; margin-bottom: 40px; font-size: 17px; }
 
   .trailer { background: var(--bg-2); }
+  /* Breakout: the player spans nearly the full viewport, wider than the text
+     column, so the 16:9 trailer plays big and cinematic. */
+  .player-wrap { width: min(1480px, calc(100vw - 28px)); margin: 0 auto; }
   .player { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 70px rgba(0,0,0,0.55); border: 1px solid rgba(240,167,66,0.18); }
+  .player video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 
   .scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
   .scene { border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 10px 34px rgba(0,0,0,0.45); }
@@ -95,9 +99,11 @@
   <div class="container">
     <p class="kicker">Trailer</p>
     <h2>Step into the burrow</h2>
-    <p class="intro">Two minutes in a world made of felt, firelight, and very big eyes.</p>
+    <p class="intro">Half a minute in a world made of felt, firelight, and very big eyes.</p>
+  </div>
+  <div class="player-wrap">
     <div class="player">
-      <video controls playsinline preload="metadata" poster="assets/scene-campfire.jpg">
+      <video controls playsinline preload="metadata" poster="assets/trailer-poster.jpg">
         <source src="assets/trailer-web.mp4" type="video/mp4">
       </video>
     </div>
